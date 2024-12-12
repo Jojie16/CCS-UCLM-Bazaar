@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">CCS-UCLM Bazaar</div>
+        <div class="tagline">Where Learning Meets Trading</div>
+        <form id="loginForm">
+            <div class="form-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="student_id" placeholder="Student ID" required>
+            </div>
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+            <div id="error-message" class="error-message"></div>
+            <div class="signup">
+                Don't have an account? <a href="/sign-up/signup.html">Sign up</a>
+            </div>
+        </form>
+    </div>
+    <script src="../MainJS-Files/main.js"></script>
+</body>
+</html>

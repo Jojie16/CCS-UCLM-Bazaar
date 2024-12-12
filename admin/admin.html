@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin.css">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h2>Admin Dashboard</h2>
+
+    <!-- Add Account Form -->
+    <div>
+        <h3>Add New Account</h3>
+        <div class="form-group">
+            <input type="text" id="first_name" placeholder="First Name" required>
+        </div>
+        <div class="form-group">
+            <input type="text" id="last_name" placeholder="Last Name" required>
+        </div>
+        <div class="form-group">
+            <select id="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" id="student_id" placeholder="Student ID" required>
+        </div>
+        <div class="form-group">
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <input type="password" id="repeat_password" placeholder="Repeat Password" required>
+        </div>
+        <div class="form-group">
+            <input type="text" id="year_level" placeholder="Year Level" required>
+        </div>
+        <div class="form-group">
+            <select id="role" required>
+                <option value="buyer">Buyer</option>
+                <option value="seller">Seller</option>
+            </select>
+        </div>
+        <button type="button" onclick="addAccount()">Add Account</button>
+    </div>
+
+    <!-- Display Registered Accounts -->
+    <h3>Registered Accounts</h3>
+    <table id="accountsTable">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Student ID</th>
+                <th>Year Level</th>
+                <th>Role</th>
+                <th>Password</th> <!-- Added column for password -->
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Accounts will be displayed here -->
+        </tbody>
+    </table>
+
+    <script src="../MainJS-Files/main.js"></script>
+</body>
+</html>
