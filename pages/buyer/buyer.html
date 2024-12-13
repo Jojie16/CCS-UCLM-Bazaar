@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard</title>
+    <link rel="stylesheet" href="buyer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">UCLMBazaar</div>
+        <div class="search-bar">
+            <input type="text" id="searchItem" placeholder="Search items...">
+        </div>
+        <div class="right-container">
+            <div class="account-settings">
+                <button id="accountSettingsBtn">
+                    <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
+                </button>
+                <div id="accountDropdown" class="dropdown-content">
+                    <span id="userName"></span> <!-- This will display the logged-in user's name -->
+                    <a href="#">Profile</a>
+                    <a href="buyer.html">Home</a>
+                    <a href="checkout.html">Orders</a>
+                    <a href="../../login/login.html">Logout</a>
+                </div>
+            </div>
+            <div class="cart">
+                <button id="cartBtn" onclick="window.location.href='cart.html'">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>  <!-- Cart item count -->
+                </button>
+            </div>            
+        </div>
+        
+    </nav>
+
+<!-- Product Gallery Section -->
+<div class="product-gallery">
+    <h3>Available Products</h3>
+    <div class="product-card">
+        <!-- Products will be dynamically inserted here -->
+    </div>
+</div>
+
+<script src="../../MainJS-Files/main.js"></script>
+<script src="../seller/seller.js"></script>
+<script src="buyer.js"></script>
+</body>
+</html>

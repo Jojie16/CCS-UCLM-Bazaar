@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    <link rel="stylesheet" href="seller.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">UCLMBazaar</div>
+        <div class="search-bar">
+            <input type="text" id="searchItem" placeholder="Search items...">
+        </div>
+        <div class="right-container">
+            <div class="account-settings">
+                <button id="accountSettingsBtn">
+                    <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
+                </button>
+                <div id="accountDropdown" class="dropdown-content">
+                    <span id="userName"></span>
+                    <a href="#">Profile</a>
+                    <a href="../../login/login.html">Logout</a>
+                </div>
+            </div>
+            <div class="cart">
+                <button id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+
+    <!-- Product Posting Section -->
+    <div class="product-posting">
+        <form id="postProductForm">
+            <div class="form-group">
+                <h1>Post a New Product</h1><br>
+                <label for="productImages">Product Images (Upload or Drag & Drop):</label>
+                <input type="file" id="productImages" multiple>
+            </div>
+            <div class="form-group">
+                <label for="productType">Product Type:</label>
+                <select id="productType">
+                    <option value="Gadget">Gadget</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Uniform">Uniform</option>
+                    <option value="Schoolsupply">School Supply</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="productStatus">Product Status:</label>
+                <select id="productStatus">
+                    <option value="active">Active</option>
+                    <option value="sold">Sold</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="productDetails">Product Details:</label>
+                <textarea id="productDetails" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Product Price:</label>
+                <input type="number" id="productPrice" placeholder="Enter Price" required>
+            </div>
+            <button type="submit">Post Product</button>
+        </form>
+    </div>
+
+    <!-- Product Gallery Section -->
+    <div class="product-gallery">
+        <h3>Products for Sale</h3>
+        <div class="product-card" id="productCardTemplate">
+            <!-- Product Cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script src="seller.js"></script>
+    <script src="../../MainJS-Files/main.js"></script>
+</body>
+</html>
