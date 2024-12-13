@@ -5,6 +5,7 @@
     font-family: Arial, sans-serif;
 }
 
+/* Navigation Bar */
 nav {
     display: flex;
     justify-content: space-between;
@@ -17,11 +18,6 @@ nav {
 nav .logo {
     font-size: 24px;
     font-weight: bold;
-}
-
-nav a{
-    color: #fff;
-    text-decoration: none;
 }
 
 nav .search-bar input {
@@ -83,7 +79,17 @@ nav .account-settings:hover .dropdown-content {
     display: block;
 }
 
-/* Gallery container */
+header {
+    padding: 20px;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
 .product-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -98,6 +104,7 @@ nav .account-settings:hover .dropdown-content {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
+    position: relative;
 }
 
 .product-item img {
@@ -116,7 +123,7 @@ nav .account-settings:hover .dropdown-content {
     margin: 5px 0;
 }
 
-.product-item button {
+.cancel-btn {
     background-color: #ff6347;
     color: white;
     padding: 8px 16px;
@@ -127,30 +134,8 @@ nav .account-settings:hover .dropdown-content {
     margin-top: 10px;
 }
 
-.product-item button:hover {
+.cancel-btn:hover {
     background-color: #e5533c;
-}
-
-/* Cart total section */
-#cartTotal {
-    text-align: right;
-    padding: 20px;
-    font-size: 1.2rem;
-}
-
-#checkoutBtn {
-    background-color: #28a745;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-#checkoutBtn:hover {
-    background-color: #218838;
 }
 
 /* Cart Button */

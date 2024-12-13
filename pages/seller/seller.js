@@ -58,6 +58,7 @@ function displayProducts() {
 }
 
 
+
 // Delete Product from Gallery
 function deleteProduct(index) {
     const products = JSON.parse(localStorage.getItem('products')) || [];
@@ -101,7 +102,7 @@ function notifySellerOfCheckout(sellerName, productDetails) {
 }
 
 // Handle Posting Product
-document.getElementById('postProductForm').addEventListener('submit', function (event) {
+document.getElementById('postProductForm').addEventListener('submit', async function (event) {
     event.preventDefault();
 
     const productImages = document.getElementById('productImages').files;
@@ -116,28 +117,32 @@ document.getElementById('postProductForm').addEventListener('submit', function (
     }
 
     // Get the current logged-in user's details (seller's name)
-    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-    const loggedInAccount = accounts.find(account => account.role === "seller");
+    const loggedInAccount = JSON.parse(localStorage.getItem('loggedInUser'));
 
-    if (!loggedInAccount) {
+    if (!loggedInAccount || loggedInAccount.role !== "seller") {
         alert('No seller found or not logged in!');
         return;
     }
 
-    const sellerName = `${loggedInAccount.firstName} ${loggedInAccount.lastName}`; // Combine first and last name
+    const sellerName = `${loggedInAccount.firstName} ${loggedInAccount.lastName}`;
 
     // Get the current date and time
-    const postedAt = new Date().toLocaleString();  // Format: MM/DD/YYYY, HH:MM:SS AM/PM
+    const postedAt = new Date().toLocaleString();
+
+    // Convert image files to Base64
+    const imagesBase64 = await Promise.all(
+        Array.from(productImages).map((image) => convertToBase64(image))
+    );
 
     // Create product object
     const product = {
-        images: Array.from(productImages).map(img => URL.createObjectURL(img)),
+        images: imagesBase64, // Store Base64-encoded images
         type: productType,
         status: productStatus,
         details: productDetails,
         price: productPrice,
         seller: sellerName,
-        postedAt: postedAt // Add posted date and time
+        postedAt: postedAt,
     };
 
     // Store product to localStorage
@@ -148,3 +153,13 @@ document.getElementById('postProductForm').addEventListener('submit', function (
     // Display the product in the gallery
     displayProducts();
 });
+
+// Utility function to convert a File object to a Base64 string
+function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}

@@ -1,22 +1,19 @@
-window.onload = function() {
-    displayCartItems();  // Display cart items on page load
+window.onload = function () {
+    displayCartItems();
 };
 
-// Fetch and display cart items in gallery format
 function displayCartItems() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];  // Get cart items from localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartItemsContainer = document.getElementById('cartItems');
     const totalPriceElement = document.getElementById('totalPrice');
     let totalPrice = 0;
 
-    // Clear any existing cart items
     cartItemsContainer.innerHTML = '';
 
-    // Display each product in the cart as a gallery item
-    cart.forEach(product => {
+    cart.forEach((product, index) => {
         const productCard = document.createElement('div');
         productCard.classList.add('product-item');
-        
+
         productCard.innerHTML = `
             <img src="${product.images[0]}" alt="Product Image">
             <h4>${product.seller}</h4>
@@ -25,39 +22,52 @@ function displayCartItems() {
             <p><strong>Status:</strong> ${product.status}</p>
             <p><strong>Type:</strong> ${product.type}</p>
             <p><strong>Posted At:</strong><br>${product.postedAt}</p>
-            <button class="remove-from-cart" onclick="removeFromCart('${product.details}')">Remove</button>
+            <button class="remove-from-cart" onclick="confirmRemoveFromCart(${index})">Remove</button>
         `;
-        
-        cartItemsContainer.appendChild(productCard);
 
-        totalPrice += parseFloat(product.price);  // Add the product price to the total
+        cartItemsContainer.appendChild(productCard);
+        totalPrice += parseFloat(product.price);
     });
 
-    // Update the total price
     totalPriceElement.textContent = totalPrice.toFixed(2);
 }
 
-// Remove product from cart
-function removeFromCart(productDetails) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart = cart.filter(product => product.details !== productDetails);  // Remove the product from the cart array
-
-    localStorage.setItem('cart', JSON.stringify(cart));  // Save the updated cart
-    displayCartItems();  // Re-render the cart items after removal
+function confirmRemoveFromCart(index) {
+    if (confirm('Are you sure you want to remove this product from the cart?')) {
+        removeFromCart(index);
+    }
 }
 
-// Checkout button handler
-document.getElementById('checkoutBtn')?.addEventListener('click', function() {
-    if (confirm("Proceed to checkout?")) {
-        // Handle the checkout process (you can redirect to a checkout page or process payment here)
-        alert("Checkout successful!");
+function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);  // Remove the item at the given index
+    localStorage.setItem('cart', JSON.stringify(cart));  // Save updated cart to localStorage
+    displayCartItems();
+}
+
+document.getElementById('checkoutBtn')?.addEventListener('click', function () {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    if (cart.length === 0) {
+        alert('Your cart is empty! Please add items before proceeding to checkout.');
+        return;
+    }
+
+    if (confirm('Are you sure you want to proceed to checkout?')) {
+        const checkoutData = cart.map((product) => ({
+            id: `CHK-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+            ...product,
+            checkoutAt: new Date().toLocaleString()
+        }));
+
+        const existingCheckoutData = JSON.parse(localStorage.getItem('checkoutData')) || [];  // Get existing checkout data
+        const updatedCheckoutData = existingCheckoutData.concat(checkoutData);  // Append new checkout data
+
+        localStorage.setItem('checkoutData', JSON.stringify(updatedCheckoutData));  // Save updated checkout data
+
         localStorage.removeItem('cart');  // Clear cart after checkout
+
+        alert('Checkout successful!');
         window.location.href = 'checkout.html';  // Redirect to checkout page
     }
-});
-
-// Handle logout action
-document.getElementById('logoutBtn')?.addEventListener('click', function() {
-    localStorage.removeItem('loggedInUser');  // Clear logged-in user data from localStorage
-    window.location.href = "../../login/login.html";  // Redirect to login page
 });
