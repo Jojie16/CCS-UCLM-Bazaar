@@ -17,7 +17,7 @@
         <div class="right-container">
             <div class="account-settings">
                 <button id="accountSettingsBtn">
-                    <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
+                    <i class="fas fa-user"></i>
                 </button>
                 <div id="accountDropdown" class="dropdown-content">
                     <span id="userName"></span>
@@ -25,13 +25,16 @@
                     <a href="../../login/login.html">Logout</a>
                 </div>
             </div>
-            <div class="cart">
-                <button id="cartBtn">
-                    <i class="fas fa-shopping-cart"></i>
-                </button>
+            <div class="notifications">
+                <button id="notificationBtn">
+                    <a href="../buyer/seller2.html"><i class="fas fa-bell"></i>
+                        <span id="notificationCount" class="notification-count">1</span>
+                    </a>
+                    </button>
             </div>
         </div>
     </nav>
+    
     
 
     <!-- Product Posting Section -->
@@ -55,8 +58,9 @@
             <div class="form-group">
                 <label for="productStatus">Product Status:</label>
                 <select id="productStatus">
-                    <option value="active">Active</option>
-                    <option value="sold">Sold</option>
+                    <option value="For Sale">For Sale</option>
+                    <option value="For Swap">For Swap</option>
+                    <option value="Sold">Sold</option>
                 </select>
             </div>
             <div class="form-group">
@@ -72,14 +76,14 @@
     </div>
 
     <!-- Product Gallery Section -->
+    <h3 class="productPosted">Products Posted</h3>
     <div class="product-gallery">
-        <h3>Products for Sale</h3>
         <div class="product-card" id="productCardTemplate">
             <!-- Product Cards will be dynamically inserted here -->
         </div>
     </div>
 
     <script src="seller.js"></script>
-    <script src="../../MainJS-Files/main.js"></script>
+    <!-- <script src="../../MainJS-Files/main.js"></script> -->
 </body>
 </html>

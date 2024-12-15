@@ -1,5 +1,5 @@
 // Handle Logout
-document.getElementById('logoutBtn')?.addEventListener('click', function() {
+document.getElementById('logoutBtn')?.addEventListener('click', function () {
     // Clear the logged-in user from localStorage
     localStorage.removeItem('loggedInUser');
     // Redirect to the login page
@@ -7,10 +7,11 @@ document.getElementById('logoutBtn')?.addEventListener('click', function() {
 });
 
 // Initialize and display the logged-in user's name on page load
-window.onload = function() {
+window.onload = function () {
     getLoggedInUser();
     displayProducts();
-    loadNotifications();  // Load notifications for the seller
+    loadNotifications(); // Load notifications for the seller
+    loadPendingOrders(); // Load pending orders for the seller
 };
 
 // Display logged-in user's name
@@ -27,7 +28,6 @@ function getLoggedInUser() {
         console.log('No logged-in user found!');
     }
 }
-
 
 // Display Products in Gallery
 function displayProducts() {
@@ -57,14 +57,12 @@ function displayProducts() {
     });
 }
 
-
-
 // Delete Product from Gallery
 function deleteProduct(index) {
     const products = JSON.parse(localStorage.getItem('products')) || [];
     products.splice(index, 1); // Remove product from array
-    localStorage.setItem('products', JSON.stringify(products));
-    displayProducts();
+    localStorage.setItem('products', JSON.stringify(products)); // Update localStorage
+    displayProducts(); // Refresh gallery
     alert("Product deleted successfully.");
 }
 
@@ -72,7 +70,7 @@ function deleteProduct(index) {
 function loadNotifications() {
     const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
     const notificationsList = document.getElementById('notificationsList');
-    
+
     // Clear previous notifications
     notificationsList.innerHTML = '';
 
@@ -84,19 +82,79 @@ function loadNotifications() {
     });
 }
 
+// Load pending orders for the seller
+function loadPendingOrders() {
+    const checkoutData = JSON.parse(localStorage.getItem('checkoutData')) || [];
+    const pendingOrders = checkoutData.filter(order => order.status === 'pending');
+    const pendingOrdersContainer = document.getElementById('pendingOrdersList');
+    pendingOrdersContainer.innerHTML = ''; // Clear existing orders
+
+    pendingOrders.forEach(order => {
+        const orderItem = document.createElement('li');
+        orderItem.innerHTML = `
+            <strong>${order.seller}</strong> ordered: ${order.details} 
+            <button onclick="acceptOrder('${order.id}')">Accept</button>
+            <button onclick="declineOrder('${order.id}')">Decline</button>
+        `;
+        pendingOrdersContainer.appendChild(orderItem);
+    });
+}
+
+// Handle accepting an order
+function acceptOrder(orderId) {
+    const checkoutData = JSON.parse(localStorage.getItem('checkoutData')) || [];
+    const updatedCheckoutData = checkoutData.map(order => {
+        if (order.id === orderId) {
+            order.status = 'accepted';
+            notifyCustomer(order.seller, order.details, 'accepted');
+        }
+        return order;
+    });
+
+    localStorage.setItem('checkoutData', JSON.stringify(updatedCheckoutData));
+    loadPendingOrders(); // Reload pending orders list
+}
+
+// Handle declining an order
+function declineOrder(orderId) {
+    const checkoutData = JSON.parse(localStorage.getItem('checkoutData')) || [];
+    const updatedCheckoutData = checkoutData.map(order => {
+        if (order.id === orderId) {
+            order.status = 'declined';
+            notifyCustomer(order.seller, order.details, 'declined');
+        }
+        return order;
+    });
+
+    localStorage.setItem('checkoutData', JSON.stringify(updatedCheckoutData));
+    loadPendingOrders(); // Reload pending orders list
+}
+
+// Notify the customer that the seller accepted or declined the order
+function notifyCustomer(sellerName, productDetails, status) {
+    const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+    const notificationMessage = status === 'accepted' 
+        ? `Seller ${sellerName} accepted your order: ${productDetails}.` 
+        : `Seller ${sellerName} declined your order. Please choose another item.`;
+
+    notifications.push(notificationMessage);
+    localStorage.setItem('notifications', JSON.stringify(notifications));
+    loadNotifications(); // Reload notifications on the customer side
+}
+
 // Listen for checkout event and add a notification for the seller
 function notifySellerOfCheckout(sellerName, productDetails) {
     const notification = `${sellerName} has had a product bought: ${productDetails}`;
 
     // Get the current notifications
     const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
-    
+
     // Add the new notification
     notifications.push(notification);
-    
+
     // Save the updated notifications to localStorage
     localStorage.setItem('notifications', JSON.stringify(notifications));
-    
+
     // Reload notifications to update the UI
     loadNotifications();
 }
@@ -152,6 +210,7 @@ document.getElementById('postProductForm').addEventListener('submit', async func
 
     // Display the product in the gallery
     displayProducts();
+    alert("Product posted successfully!");
 });
 
 // Utility function to convert a File object to a Base64 string

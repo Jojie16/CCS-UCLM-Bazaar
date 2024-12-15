@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <link rel="stylesheet" href="checkout.css">
+    <title>Buyer Checkout</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <nav>
-        <div class="logo"><a href="buyer.html">UCLMBazaar</a></div>
+        <a href="javascript:history.back()" class="logo">UCLMBazaar</a>
         <div class="search-bar">
             <input type="text" id="searchItem" placeholder="Search items...">
         </div>
         <div class="right-container">
             <div class="account-settings">
                 <button id="accountSettingsBtn">
-                    <i class="fas fa-user"></i> <!-- Font Awesome user icon -->
+                    <i class="fas fa-user"></i>
                 </button>
                 <div id="accountDropdown" class="dropdown-content">
                     <span id="userName"></span>
@@ -26,21 +26,22 @@
                     <a href="../../login/login.html">Logout</a>
                 </div>
             </div>
-            <div class="cart">
-                <button id="cartBtn" onclick="window.location.href='cart2.html'">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>  <!-- Cart item count -->
-                </button>
-            </div>            
         </div>
-        
     </nav>
     <header>
-        <center><br><h1>To Recieved Items</h1></center>
+        <center><br><h1>Your Cart</h1></center>
     </header>
+
     <main>
-        <div id="checkoutItems" class="product-gallery"></div>
+        <div id="cartItems" class="product-gallery"></div>  <!-- Container for cart items -->
+        <div id="cartTotal">
+            <h3>Total: $<span id="totalPrice">0</span></h3>  <!-- Display the total price -->
+        </div>
+        <center><button id="checkoutBtn">Proceed to Checkout</button></center>
     </main>
-    <script src="checkout.js"></script>
+
+    <div id="buyerMessage" style="display:none;"></div>
+
+    <script src="cart2.js"></script>
 </body>
 </html>

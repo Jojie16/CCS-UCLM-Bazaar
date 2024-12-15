@@ -1,3 +1,38 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#buyerMessage {
+    margin-top: 20px;
+    font-weight: bold;
+    color: green;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -197,4 +232,130 @@ nav .account-settings:hover .dropdown-content {
 
 #accountSettingsBtn span {
     margin-left: 5px;
+}
+.order-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    padding: 15px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 500px;
+}
+.order-item{
+    border-bottom: 3px solid rgb(41, 41, 41);
+}
+.order-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.order-card h4 {
+    margin: 0;
+    color: #555;
+}
+.order-card p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+.order-card button {
+    margin: 10px 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+#acceptBtn {
+    background-color: #4CAF50;
+}
+#declineBtn,
+#declineBtn0,
+#declineBtn1,
+#declineBtn2,
+#declineBtn3,
+#declineBtn4,
+#declineBtn5 {
+    background-color: #f44336;
+}
+.success-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    display: none;
+}
+
+
+/* Notification Icon */
+.notifications {
+    position: relative;
+}
+
+.notifications a{
+    color: #fff;
+}
+
+.notifications button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+}
+
+.notifications .notification-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+
+.notifications .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #333;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    color: white;
+    padding: 10px;
+}
+
+.notifications .dropdown-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.notifications .dropdown-content ul li {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.notifications .dropdown-content ul li:hover {
+    background-color: #575757;
+    padding: 5px;
+}
+
+/* Show the dropdown when the button is clicked */
+.notifications:hover .dropdown-content {
+    display: block;
 }

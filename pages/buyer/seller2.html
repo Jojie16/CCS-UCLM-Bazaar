@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Transactions Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="logo"><a href="../seller/seller.html">UCLMBazaar</a></div>
+        <div class="search-bar">
+            <input type="text" id="searchItem" placeholder="Search items...">
+        </div>
+        <div class="right-container">
+            <div class="account-settings">
+                <button id="accountSettingsBtn">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div id="accountDropdown" class="dropdown-content">
+                    <span id="userName"></span>
+                    <a href="#">Profile</a>
+                    <a href="../../login/login.html">Logout</a>
+                </div>
+            </div>
+            <div class="notifications">
+                <button id="notificationBtn">
+                    <a href="../buyer/seller2.html"><i class="fas fa-bell"></i>
+                        <span id="notificationCount" class="notification-count">1</span>
+                    </a>
+                    </button>
+            </div>
+        </div>
+    </nav>
+    <center><h1>Seller Transaction Page</h1></center>
+    <div id="orderRequest" class="order-card" style="display:none;">
+        <img id="productImage" src="" alt="Product Image">
+        <h4 id="userName">Buyer: [Name]</h4>
+        <p id="productDescription">[Product Description]</p>
+        <p><strong>Status:</strong> <span id="productStatus">[Status]</span></p>
+        <p><strong>Type:</strong> <span id="productType">[Type]</span></p>
+        <p><strong>Requested At:</strong> <span id="requestedAt">[Date & Time]</span></p>
+        <p><strong>Price:</strong> $<span id="productPrice">[Price]</span></p>
+        <button id="acceptBtn">Accept Order</button>
+        <button id="declineBtn">Decline Order</button>
+    </div>
+    <div class="success-message" id="successMessage"></div>
+
+    <script src="seller2.js"></script>
+</body>
+</html>
